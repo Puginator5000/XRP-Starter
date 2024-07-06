@@ -6,16 +6,16 @@ package frc.robot;
 
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Arm;
-import frc.robot.commands.MoveArmCommand;
+//import frc.robot.commands.MoveArmCommand;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
+//import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
+//import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
 
@@ -25,7 +25,7 @@ public class RobotContainer {
   private final DriveBase m_db = new DriveBase();
   private final Arm m_arm = new Arm();
 
-  private MoveArmCommand m_go90Cmd = new MoveArmCommand(m_arm, 90);
+  //private MoveArmCommand m_go90Cmd = new MoveArmCommand(m_arm, 90);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -42,6 +42,8 @@ public class RobotContainer {
     m_driverController.y().whileTrue(m_arm.getMoveArmCommand(0));
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     m_driverController.x().onTrue(m_db.getDriveUntilCommand(500).withTimeout(5));     //break-it-down loop, so needs to be put in timeout
+
+    m_driverController.leftBumper().onTrue(m_db.getGoToSetpointCommand(180));
 
     m_db.setDefaultCommand(getArcadeDriveCommand());
     m_arm.setDefaultCommand(m_arm.getMoveArmCommand(90));
